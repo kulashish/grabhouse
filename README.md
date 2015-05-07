@@ -26,3 +26,5 @@ I used a J48 decision tree model and trained it using the training data (as crea
 
 Space data output (Refer to DataOut.java):
 The label predictions are then added back to the missing elements in spacedata.txt and the output written to spaceout.txt.
+
+The 'files' folder contains the training/test datasets and the output spaceout.txt.
