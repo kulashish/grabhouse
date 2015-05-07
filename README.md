@@ -28,3 +28,14 @@ Space data output (Refer to DataOut.java):
 The label predictions are then added back to the missing elements in spacedata.txt and the output written to spaceout.txt.
 
 The 'files' folder contains the training/test datasets and the output spaceout.txt.
+
+----------------------------------------------------------------------------------
+Part 2: Inferring state of the element at each point
+We now have element value at each point and the problem is to infer its state 1-4. The problem presents itself as a case for applying HMM (Hidden Markov Model), where, the point values are the observed random variables and their states are the unobserved random variables. The HMM model has three parameters -
+(1) Initial probability: We can use the data in variousStatesDataset.txt to estimate the initial probabilities for each state as P(state=1) = P(state=2) = P(state=3) = P(state=4) = 0.25
+(2) Emission probability: This is the probability of a state emitting a certain point value. Again, we can use the data in variousStatesDataset.txt to estimate the emission probabilities. For instance, P(element=35|state=1) = 0.002. The complete emission probabilties are computed in emission.csv (refer files folder).
+(3) Transition probability: This is the probability of transitioning from one state to other. For instance, P(state_i = 2|state_i-1 = 1) = ? Unfortunately, there is no training data available to estimate these probabilities. This is a blocker and therefore makes it impossible to apply HMM here.
+
+Alternate solution:
+Next, I looked at the number of times an element is observed in a particular state. This is available in freq.csv (in the files folder). Interestingly, an element is observed to be in a particular state most number of times as compared to in any of the other states. For instance, element 35 is observed in state=2 67 times, 2 times in state=1 or 3 and 1 time in state=4. Thus, a simple model could be to tag an element value with the state that it is most commonly observed in. In the example above, element=35 is tagged to state=2.
+
